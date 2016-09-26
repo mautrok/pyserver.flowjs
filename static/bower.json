@@ -1,0 +1,15 @@
+{
+  "name": "flowsample",
+  "homepage": "https://github.com/mautrok/pyserver.flowjs",
+  "authors": [
+    "mautrok <mautrok@gmail.com>"
+  ],
+  "description": "angular pages for sample taken from the original project ngflow",
+  "main": "index.html",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular": "^1.5.8",
+    "ng-flow": "^2.7.4"
+  }
+}
