@@ -17,7 +17,7 @@ logging.basicConfig(filename=configimpl.config.get('fileconfig','logpath'),level
 uploadpath=configimpl.config.get('fileconfig','uploadedpath')
 
 """
-        this metthod take cover
+        this method take cover
         of the CORS options
 """
 def corsbuildresponse(responseflask,requestflaskorigin):
@@ -33,6 +33,7 @@ def index():
 @app.route('/upload',methods=['GET','POST'])
 def upload():
 	resp=Response()
+	
 	filename=None
 	responseTotalChunks=None
 	"""
@@ -40,26 +41,9 @@ def upload():
         one give some information for the program to use to
         build the file when the upload is finished
         """
-	if (request.method == 'GET'):
-		#check the validity of the file
-		filename=str(request.args.get('flowFilename'))
-		responseTotalChunks={'totalchunks':request.args.get('flowTotalChunks')}
-		n = json.dumps(responseTotalChunks)
-		resp.data=n
-		resp.status='400'
-		return resp
-	else:
-                filename=request.form['flowFilename']
-                chunkOperationUtil(request,resp)
-                if os.path.isfile(uploadpath+configimpl.config.get('fileconfig','folderlike')+filename):
-                        path=str(configimpl.config.get('fileconfig','uploadforhtml')+filename)
-                        responseTotalChunks={'msg':'file upload complete','address':path,'filename':filename}
-                else:
-                        logging.info('file not yet completed %s ' % str(request.form['flowChunkNumber']))
-                n = json.dumps(responseTotalChunks)
-                resp.data=n
-                return resp
-
+	chunkOperationUtil(request,resp);
+	return resp
+        
 if __name__ == '__main__':
         app.debug=configimpl.config.getboolean('flask','debug')
         app.run(host=configimpl.config.get('flask','host'),port=configimpl.config.getint('flask','port'))

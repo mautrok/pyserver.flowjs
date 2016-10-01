@@ -1,1 +1,5 @@
-Include/Python-ast.h
+Include/
+tcl/
+lib/
+Scripts/
+static/bower_components/
